@@ -138,9 +138,20 @@ cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-        int type,val;
-        cin>>type>>val;
-          
+          string s;cin>>s;
+          int n=s.length();
+          bool anse=false;
+          for(int i=0;i<n;i++){
+            string num1=s.substr(0,i+1);
+            string num2=s.substr(i+1);
+            if(stoi(num1)>stoi(num2)){
+                if(num1[0]=='0' || num2[0]=='0')continue;
+                anse=true;
+                cout<<num1<<" "<<num2<<endl;
+                break;
+            }
+          }
+          if(!anse)cout<<-1<<endl;
     }
     return 0;
 }
