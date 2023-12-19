@@ -138,8 +138,10 @@ cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-        int type,val;
-        cin>>type>>val;
+        int n;
+        cin>>n;
+        vi nums(n);
+        for(int i=0;<n;i++)cin>>nums[i];
           
     }
     return 0;
