@@ -77,6 +77,7 @@ primes.push_back(i);
 }
 }
 }
+vi allfactors;
 ll factorial[maxn];
 void calcfact()
 {
@@ -84,6 +85,24 @@ factorial[0] = 1;
 for (ll i = 1; i < maxn; i++) 
 factorial[i] = (factorial[i - 1] * i) % mod; 
 }
+void factorize(int n) 
+{ 
+    
+    while (n % 2 == 0) 
+    { 
+        allfactors.push_back(2);
+                n = n/2; 
+    } 
+    for (int i = 3; i <= sqrt(n); i = i + 2) 
+    { 
+        while (n % i == 0) 
+        { 
+                allfactors.push_back(i);
+                n = n/i; 
+        } 
+    } 
+    if (n > 2)allfactors.push_back(n);
+} 
 ll power(ll x, ll y)
 {
 ll res = 1;
@@ -138,20 +157,31 @@ cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-        int x;cin>>x;
-        int a=0,b=0;
-        bool ftime=true;
-        for(int i=30;i>=0;i--){
-            int bit=(x&(1<<i));
-            if(bit && ftime){
-                b|=(1<<i);
-                ftime=false;
-            }
-            else if(bit && !ftime){
-                a|=(1<<i);
-            }
-        }  
-        cout<<a<<" "<<b<<endl;
+        mpl fre;
+            allfactors.clear();
+           int x,q;
+            cin>>x>>q;
+            factorize(x);
+            for(auto &f:allfactors)fre[f]++;
+            while(q--){
+                int p;
+                cin>>p;
+                p++;
+                int sz=allfactors.size();
+                int res=1;
+                for(auto &pr:fre){
+                    int curr=0;
+                    int val=pr.second ;
+                    if(p>=2)curr++;
+                    --p;
+                    int checkvla=val/p;
+                    int div=p;
+                    if(val%div==0 && checkvla<val)curr++;
+                    res=(res*curr)%mod;
+                    ++p;
+                }
+            cout<<res<<endl;
     }
+}
     return 0;
 }

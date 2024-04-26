@@ -138,16 +138,18 @@ cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-        string s;cin>>s;
-        int n=s.length();
-        ll ans=0;
-        ll cnt=0;
+        int n,m;
+        cin>>n>>m;
+        vi nums(n);
+        for(int i=0;i<n;i++)cin>>nums[i];
+        int ans=0;
+        int sum=0;
         for(int i=0;i<n;i++){
-            if(s[i]=='a')cnt++;
-        }
-        ans=(ans+power(2ll,cnt,mod)-1)%mod;
-        for(int i=1;i<n;i++){
-            if(s[i]=='b')ans++;
+            sum+=nums[i];
+            if(sum>=m){
+                ans++;
+                sum=0;
+            }
         }  
         cout<<ans<<endl;
     }
