@@ -136,9 +136,16 @@ signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
-    cin>>t;
+    // cin>>t;
     while(t--){
-          
+          string s;cin>>s;
+          int ri=-1,mi=-1;
+          for(int i=0;i<3;i++){
+            if(s[i]=='R')ri=i;
+            if(s[i]=='M')mi=i;
+          }
+          if(ri<mi)cout<<"Yes\n";
+          else cout<<"No\n";
     }
     return 0;
 }

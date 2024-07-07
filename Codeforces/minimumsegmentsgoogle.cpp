@@ -131,14 +131,51 @@ for (int i = 1; i <= n; i++)
 fac[i] = (fac[i - 1] * i) % p;
 return (fac[n] * modInverse(fac[r], p) % p * modInverse(fac[n - r], p) % p)% p;
 }
+vector<pi> mergeintervals(vector<pi>&intervals){
+    sort(all(intervals));
+    vector<pi>ni;
+    int cs=intervals[0].first,ce=intervals[0].second;
+    int i=1;
+    int n=intervals.size();
+    while(i<n){
+        int j=i;
+        while(j<n && intervals[j].first<=ce){
+            j++;
+        }
+        ni.push_back({cs,max(intervals[j-1].second,ce)});
+        if(j==n)break;
+        cs=intervals[j].first,ce=max(ce,intervals[j].second);
+        i=j;
+    }
+    return ni;
+}
 int logb2(ll x){ return __builtin_clzll(1ll) - __builtin_clzll(x); }
+// int f()
 signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-          
+          int n;
+          cin>>n;
+          vi a(n),b(n);
+          cin>>a>>b;
+          int k;cin>>k;
+          vpi iv(n);
+          for(int i=0;i<n;i++)iv[i]={a[i],b[i]};
+          vpi miv=mergeintervals(iv);
+          int ans=miv.size();
+            for(int i=0;i<miv.size();i++){
+                int ts=miv[i].second+k;
+                pi tp={ts+1,-1e9};
+                auto idx=lower_bound(all(miv),tp);
+                --idx;
+                int val=idx-(miv.begin()+i);
+                ans=min(ans,miv.size()-val);
+            }
+            cout<<ans<<endl;
+
     }
     return 0;
 }

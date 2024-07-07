@@ -136,9 +136,37 @@ signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
-    cin>>t;
+    // cin>>t;
     while(t--){
-          
+          string a,b;cin>>a>>b;
+          int n=a.length();
+          bool anse=false;
+          for(int c=1;c<n;c++){
+            for(int w=c;w<n;w++){
+                int i=0;
+                vs v;
+                while(i<n){
+                    v.push_back(a.substr(i,w));
+                    i+=w;
+                }
+                // if(c==2 && w==2){
+                //     for(auto &x:v)cout<<x<<" || ";
+                //     cout<<endl;
+                // }
+                string str="";
+                for(auto &x:v){
+                    if(x.length()<=c-1)continue;
+                    str.push_back(x[c-1]);
+                }
+                // if(c==2 && w==2)cout<<str<<endl;
+                if(str==b){
+                    anse=true;break;
+                }
+            }
+            if(anse)break;
+          }
+          if(anse)cout<<"Yes\n";
+          else cout<<"No\n";
     }
     return 0;
 }

@@ -132,13 +132,42 @@ fac[i] = (fac[i - 1] * i) % p;
 return (fac[n] * modInverse(fac[r], p) % p * modInverse(fac[n - r], p) % p)% p;
 }
 int logb2(ll x){ return __builtin_clzll(1ll) - __builtin_clzll(x); }
+int eidx;
+void f(int st,int e,int pow,int ot){
+    if(st==e){
+        eidx=st;
+        return;
+    }
+    int removals=(e-st)/pow;
+    if(!ot){
+        st+=pow;
+        if(removals%2==0){
+            e-=pow;
+        }
+
+    }else{
+        e-=pow;
+        if(removals%2==0){
+            st+=pow;
+        }
+    }
+    f(st,e,pow<<1,ot^1);
+}
 signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-          
+        string s;cin>>s;
+        int k;cin>>k;
+        // cout<<s<<" -- "<<k<<endl;
+        f(0,s.length()*k -1,1,0);
+        if(eidx<s.length()){
+            cout<<s[eidx]<<endl;
+        }else{
+            cout<<s[eidx%s.length()]<<endl;
+        }
     }
     return 0;
 }

@@ -132,13 +132,80 @@ fac[i] = (fac[i - 1] * i) % p;
 return (fac[n] * modInverse(fac[r], p) % p * modInverse(fac[n - r], p) % p)% p;
 }
 int logb2(ll x){ return __builtin_clzll(1ll) - __builtin_clzll(x); }
+vector<int> Prefix_Mex(vi &nums, int n) {
+    // Create a boolean vector to track the presence of numbers
+    vector<bool> b(n+2);
+     
+    // Initialize mex (minimum excluded value) to 0
+    int mex = 1;
+     
+    // Result vector to store the Prefix Mex values
+    vector<int> result(n);
+ 
+    // Loop through the input vector A
+    for (int i = 0; i < n; i++) {
+        // Mark the current element as present
+        b[nums[i]] = true;
+ 
+        // Update mex until a non-present value is found
+        while (b[mex] == true) {
+            mex++;
+        }
+ 
+        // Store the current mex value in the result vector
+        result[i] = mex;
+    }
+ 
+    // Return the result vector
+    return result;
+}
 signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-          
+        int n;
+        cin>>n;
+        vi nums(n);cin>>nums;
+        int ans=0;
+        vi pmex=Prefix_Mex(nums,n);
+        int precons=0,suffcons=0;
+        for(int i=0;i<n-1;i++){
+            bool f=false;
+            if(i%2==0){
+                if(i<n && pmex[i]==nums[i+1]){
+                    f=true;
+                // pmex[i]=i+2;
+                // swap(nums[i],nums[i+1]);
+                precons++;
+            }
+            }else{
+                if(pmex[i]==i+2)precons++;
+            }
+            ans=max(ans,precons);
+        }
+        if(n%2==0 && pmex[n-1]==n+1)precons++;
+
+        vi pmex2=Prefix_Mex(nums,n);
+        for(int i=n-1;i>=1;i--){
+            bool f=false;
+            if((n-1-i)%2==0){
+                if(pmex2[i]==nums[i-1]){
+                    f=true;
+                // pmex2[i]=i+2;
+                // swap(nums[i],nums[i-1]);
+                suffcons++;
+            }
+            }else{
+                if(pmex2[i]==i+2)suffcons++;
+            }
+            ans=max(ans,suffcons);
+        }
+        if(n%2==0 &&pmex2[0]==n+1)suffcons++;
+        ans=max({ans,suffcons,precons});
+        cout<<ans<<endl;
+
     }
     return 0;
 }

@@ -138,7 +138,15 @@ cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-          
+        int n;cin>>n;
+        vi nums(n);cin>>nums;
+        ll ans=n;
+        umpl fre;
+        for(auto &x:nums)fre[x]++;
+        for(int i=1;i<=n;i++){
+            ans=min(ans,(ll)(n-fre[i])*i);
+        }
+        cout<<ans<<endl;  
     }
     return 0;
 }

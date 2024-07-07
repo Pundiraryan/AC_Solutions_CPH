@@ -136,9 +136,24 @@ signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
-    cin>>t;
+    // cin>>t;
     while(t--){
-          
+          int n;cin>>n;
+          vi a(n),w(n);
+          cin>>a>>w;
+          vector<msi>fre(n+5);
+          vi tot(n+5,0);
+          for(int i=0;i<n;i++){
+            tot[a[i]]+=w[i];
+            fre[a[i]].insert(w[i]);
+          }
+          int ans=0;
+          for(int i=0;i<fre.size();i++){
+            if(fre[i].size()>1){
+                ans+=(tot[i]-*fre[i].rbegin());
+            }
+          }
+          cout<<ans<<endl;
     }
     return 0;
 }

@@ -136,9 +136,32 @@ signed main(){
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
     int t=1;
-    cin>>t;
+    // cin>>t;
     while(t--){
-          
+        int a,b;
+        cin>>a>>b;
+        string str;
+        cin>>str;
+        vi pos(a);
+        cin>>pos;
+        vi la,ra;
+        for(int i=0;i<a;i++){
+            if(str[i]=='1'){
+                ra.push_back(pos[i]+b);
+            }else{
+                la.push_back(pos[i]-b);
+            }
+        }
+        // cout<<la.size()<<" -- "<<ra.size()<<endl;
+        sort(all(ra));sort(all(la));
+        // cout<<la<<endl;
+        // cout<<ra<<endl;
+        ll ans=0;
+        for(auto &x:la){
+            ll val=lower_bound(all(ra),x+2*b)-lower_bound(all(ra),x);
+            ans+=val;
+        }
+        cout<<ans<<endl;
     }
     return 0;
 }

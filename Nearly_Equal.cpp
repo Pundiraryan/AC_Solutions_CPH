@@ -138,7 +138,24 @@ cin.tie(NULL);
     int t=1;
     cin>>t;
     while(t--){
-          
+        int n,m;
+        cin>>n>>m;
+        string a,b;cin>>a>>b;
+        int ans=1e9;
+        int ca=0;
+        for(int i=0;i<m;i++){
+            ca+=(a[i]!=b[i]);
+        }
+        ans=min(ans,ca);
+        for(int i=1;i+m<=n;i++){
+            string str=a.substr(i,m);
+            ca=0;
+            for(int j=0;j<m;j++){
+                 ca+=(str[j]!=b[j]);
+            }
+            ans=min(ans,ca);
+        }
+        cout<<ans<<endl;  
     }
     return 0;
 }

@@ -1,0 +1,1 @@
+{"name":"Local: stringrepkminusone","url":"c:\\Users\\ASUS\\Documents\\cp\\Codeforces\\stringrepkminusone.cpp","tests":[{"id":1719757611441,"input":"2\nabcd\n3\nj#k&h\n5","output":"b\n&"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\ASUS\\Documents\\cp\\Codeforces\\stringrepkminusone.cpp","group":"local","local":true}
